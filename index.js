@@ -61,6 +61,8 @@ app
     .patch( ( req, res ) =>
     {
         const body = req.body;
+        if ( !data[ Number( body.id )-1 ] )
+            return res.status( 400 ).send( "User not found" );
         data[ Number( body.id )-1 ] = body;
         data[ Number( body.id )-1 ].id = Number(body.id);
         fs.writeFile( "./mock.json", JSON.stringify( data ), ( err, user ) =>
